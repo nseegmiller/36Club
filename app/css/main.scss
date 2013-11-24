@@ -5,16 +5,13 @@
 }
 
 .current-question {
-  position: absolute;
-  top: 50%;
+  position: relative;
   left: 50%;
   $width: 200px;
-  $height: 400px;
   width: $width;
-  height: $height;
-  margin-top: $height / 2 * -1;
   margin-left: $width / 2 * -1;
   text-align: right;
+  margin-bottom: 15px;
   span {
     margin-right: 10px;
   }
@@ -24,9 +21,12 @@
   .answer {
     border-top: 4px solid black;
     padding-top: 10px;
+    position: relative;
+    width: 100%;
     input {
-      font-size: 64px;
+      font-size: 48px;
       text-align: right;
+      width: 100%;
     }
   }
 }

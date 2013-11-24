@@ -44,7 +44,7 @@ angular.module('thirtySixClub.controllers').controller('MainCntl', ['$scope',
             {a: 7, b: 7}
         ];
         $scope.currentQuestion = 0;
-        $scope.status = 'Timer will start when the first number is entered';
+        $scope.status = 'Question 1';
         $scope.state = states.WAITING;
         $scope.answer = undefined;
         var startTime = undefined;
@@ -74,7 +74,6 @@ angular.module('thirtySixClub.controllers').controller('MainCntl', ['$scope',
             if (newValue !== undefined && $scope.state === states.WAITING) {
                 $scope.state = states.RUNNING;
                 startTime = new Date();
-                $scope.status = 'Question 1';
             }
             if ($scope.answer == $scope.addQuestions[$scope.questionOrder[$scope.currentQuestion]].a + $scope.addQuestions[$scope.questionOrder[$scope.currentQuestion]].b) {
                 if ($scope.currentQuestion < $scope.addQuestions.length - 1) {
@@ -91,7 +90,15 @@ angular.module('thirtySixClub.controllers').controller('MainCntl', ['$scope',
                     var seconds = Math.round(elapsed % 60);
                     elapsed = Math.floor(elapsed / 60);
                     var minutes = Math.round(elapsed % 60);
-                    $scope.status = 'Done! Completed in ' + pad(minutes, 2) + 'minute(s) and ' + pad(seconds, 2) + 'second(s)';
+                    var minuteString = 'minute';
+                    if (minutes != 1) {
+                        minuteString += 's';
+                    }
+                    var secondString = 'second';
+                    if (seconds != 1) {
+                        secondString += 's';
+                    }
+                    $scope.status = 'Done! Completed in ' + minutes + ' ' + minuteString + ' and ' + seconds + ' ' + secondString;
                 }
             }
         });
