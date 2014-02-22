@@ -10,16 +10,32 @@
 <div ng-controller="MainCntl">
     <div class="status">{{status}}</div>
     <div class="current-question">
-        <div class="part">{{addQuestions[questionOrder[currentQuestion]].a}}</div>
-        <div class="part"><span>+</span>{{addQuestions[questionOrder[currentQuestion]].b}}</div>
+        <div class="part">{{questionList[questionOrder[currentQuestion]].a}}</div>
+        <div class="part">
+            <span ng-if="mode === modes.ADD || (mode === modes.MIXED && questionOrder[currentQuestion] < questionList.length / 2)">+</span>
+            <span ng-if="mode === modes.SUBTRACT || (mode === modes.MIXED && questionOrder[currentQuestion] >= questionList.length / 2)">-</span>
+            {{questionList[questionOrder[currentQuestion]].b}}
+        </div>
         <div class="answer">
             <input type="tel" ng-model="answer">
         </div>
     </div>
-    <div class="status" ng-if="state === 0">Timer will start when first number is entered</div>
+    <div class="status" ng-if="state === 0">
+        <div>
+            <span ng-if="mode === modes.ADD">Add</span>
+            <span ng-if="mode === modes.SUBTRACT">Subtract</span>
+            <span ng-if="mode === modes.MIXED">Mixed</span>
+            <span>Mode</span>
+        </div>
+        <div>Timer will start when first number is entered</div>
+        <button ng-click="changeMode(modes.ADD)" ng-if="mode !== modes.ADD">Add</button>
+        <button ng-click="changeMode(modes.SUBTRACT)" ng-if="mode !== modes.SUBTRACT">Subtract</button>
+        <button ng-click="changeMode(modes.MIXED)" ng-if="mode !== modes.MIXED">Mixed</button>
+    </div>
     <div class="status" ng-if="state === 2">Refresh browser to try again</div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+<script src="js/angular-local-storage.min.js"></script>
 
 <!-- build:js js/js.js -->
 <script src="js/app.js"></script>
