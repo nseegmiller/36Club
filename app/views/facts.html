@@ -1,0 +1,17 @@
+<div>
+    <div class="status">{{status}}</div>
+    <div class="current-question">
+        <div class="part">{{questionList[questionOrder[currentQuestion]].a}}</div>
+        <div class="part">
+            <span ng-if="questionList[questionOrder[currentQuestion]].op === '+'">+</span>
+            <span ng-if="questionList[questionOrder[currentQuestion]].op === '-'">–</span>
+            <span ng-if="questionList[questionOrder[currentQuestion]].op === '*'">×</span>
+            <span ng-if="questionList[questionOrder[currentQuestion]].op === '/'">÷</span>
+            {{questionList[questionOrder[currentQuestion]].b}}
+        </div>
+        <div class="answer">
+            <input type="tel" ng-model="answer">
+        </div>
+    </div>
+    <div class="status" ng-if="state === 2">Refresh browser to try again</div>
+</div>

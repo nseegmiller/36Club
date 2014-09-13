@@ -1,45 +1,43 @@
-<html lang="en" ng-app="thirtySixClub">
+<html lang="en" ng-app="thirtySixFacts">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>36 Club Quiz</title>
+    <title>Fireball's 36 Facts</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
-<div ng-controller="MainCntl">
-    <div class="status">{{status}}</div>
-    <div class="current-question">
-        <div class="part">{{questionList[questionOrder[currentQuestion]].a}}</div>
-        <div class="part">
-            <span ng-if="mode === modes.ADD || (mode === modes.MIXED && questionOrder[currentQuestion] < questionList.length / 2)">+</span>
-            <span ng-if="mode === modes.SUBTRACT || (mode === modes.MIXED && questionOrder[currentQuestion] >= questionList.length / 2)">-</span>
-            {{questionList[questionOrder[currentQuestion]].b}}
-        </div>
-        <div class="answer">
-            <input type="tel" ng-model="answer">
-        </div>
+<body ng-controller="MainCntl">
+<div class="page-container">
+    <div class="sidebar">
+        <img src="http://eastlake.jordandistrict.org/wp-content/themes/eastlake/_/inc/images/schoolmascot.png">
+        <ul>
+            <li ng-repeat="grade in grades" ng-click="$location.path(grade.path)" ng-class="{'active': $location.path() === grade.path}">
+                <span class="grade-name">{{grade.name}}</span>
+                <ul ng-if="$location.path() === grade.path">
+                    <li ng-repeat="key in getOptions(grade)" class="option" ng-class="{'active': option.mode === key}" ng-click="setOption(key)">
+                        {{key}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="help-text">Timer will start when first number is entered</div>
     </div>
-    <div class="status" ng-if="state === 0">
-        <div>
-            <span ng-if="mode === modes.ADD">Add</span>
-            <span ng-if="mode === modes.SUBTRACT">Subtract</span>
-            <span ng-if="mode === modes.MIXED">Mixed</span>
-            <span>Mode</span>
-        </div>
-        <div>Timer will start when first number is entered</div>
-        <button ng-click="changeMode(modes.ADD)" ng-if="mode !== modes.ADD">Add</button>
-        <button ng-click="changeMode(modes.SUBTRACT)" ng-if="mode !== modes.SUBTRACT">Subtract</button>
-        <button ng-click="changeMode(modes.MIXED)" ng-if="mode !== modes.MIXED">Mixed</button>
+    <div class="body">
+        <div class="header">Fireball's 36 Facts</div>
+        <div class="content" ng-view></div>
     </div>
-    <div class="status" ng-if="state === 2">Refresh browser to try again</div>
+
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js"></script>
 <script src="js/angular-local-storage.min.js"></script>
 
 <!-- build:js js/js.js -->
+<script src="js/facts.js"></script>
 <script src="js/app.js"></script>
 <script src="js/controllers/main.js"></script>
+<script src="js/controllers/facts.js"></script>
 <!-- endbuild -->
 </body>
 </html>

@@ -2,6 +2,33 @@
 
 * {
   @include box-sizing(border-box);
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Arial", Georgia, Sans-Serif;
+}
+
+$sidebar-size: 251px;
+
+.body {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: $sidebar-size;
+  bottom: 0;
+  overflow: auto;
+//  @include background(linear-gradient(0deg, red, white 10%, white));
+  .header {
+    font-size: 50px;
+    border-bottom: 1px solid black;
+    text-align: center;
+    padding: 10px 0;
+  }
+  .content {
+//    padding-top: 30px;
+  }
 }
 
 .current-question {
@@ -13,7 +40,7 @@
   text-align: right;
   margin-bottom: 15px;
   span {
-    margin-right: 10px;
+    margin-right: 30px;
   }
   .part {
     font-size: 64px;
@@ -34,4 +61,63 @@
   font-size: 36px;
   text-align: center;
   position: relative;
+  padding: 30px 0;
 }
+
+.sidebar {
+  padding-top: 15px;
+  width: $sidebar-size;
+  border-right: 1px solid gray;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: auto;
+  li {
+    font-size: 20px;
+    list-style: none;
+    line-height: 50px;
+    border-top: 1px solid black;
+    cursor: pointer;
+    .grade-name {
+      height: 50px;
+      width: 100%;
+      padding-left: 15px;
+      display: block;
+    }
+    &:last-of-type {
+      border-bottom: 1px solid black;
+    }
+    &:hover {
+      background-color: #DDD;
+      color: black;
+    }
+    &.active {
+      .grade-name {
+        background-color: red;
+        color: white;
+      }
+    }
+    .option {
+      height: 25px;
+      line-height: 25px;
+      padding-left: 30px;
+      background-color: white;
+      &:hover {
+        background-color: #DDD;
+      }
+      &.active {
+        background-color: #333;
+        color: white;
+      }
+      &:last-of-type {
+        border-bottom-width: 0px;
+      }
+    }
+  }
+  .help-text {
+    padding: 20px;
+    font-size: 20px;
+  }
+}
+
