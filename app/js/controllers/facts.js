@@ -13,8 +13,12 @@ angular.module('thirtySixFacts.controllers').controller('FactsCntl', ['$scope', 
         if (Object.keys(MathFacts[grade]).length > 1) {
             MathFacts[grade]['humdinger'] = [];
             angular.forEach(MathFacts[grade], function (value, key) {
-                MathFacts[grade]['humdinger'] = MathFacts[grade]['humdinger'].concat(value);
+                if (key !== 'humdinger') {
+                    //console.log(value, key);
+                    MathFacts[grade]['humdinger'] = MathFacts[grade]['humdinger'].concat(value);
+                }
             });
+            //console.log("Grade: " + grade, MathFacts[grade]['humdinger'], MathFacts[grade]['humdinger'].length);
         }
 
         // Safe fall back since all grades have addition
@@ -49,7 +53,7 @@ angular.module('thirtySixFacts.controllers').controller('FactsCntl', ['$scope', 
             }
 
             $scope.currentQuestion = 0;
-            $scope.status = 'Question 1';
+            $scope.status = 'Question 1 of ' + $scope.questionList.length;
             $scope.state = states.WAITING;
             $scope.answer = undefined;
             startTime = undefined;
@@ -83,7 +87,7 @@ angular.module('thirtySixFacts.controllers').controller('FactsCntl', ['$scope', 
                 if ($scope.currentQuestion < $scope.questionList.length - 1) {
                     $scope.answer = undefined;
                     $scope.currentQuestion++;
-                    $scope.status = 'Question ' + ($scope.currentQuestion + 1);
+                    $scope.status = 'Question ' + ($scope.currentQuestion + 1) + ' of ' + $scope.questionList.length;
                 }
                 else {
                     $scope.state = states.DONE;
@@ -106,5 +110,9 @@ angular.module('thirtySixFacts.controllers').controller('FactsCntl', ['$scope', 
                 }
             }
         });
+
+        $scope.reloadPage = function() {
+            location.reload();
+        };
     }
 ]);

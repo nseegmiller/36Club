@@ -111,7 +111,7 @@ $sidebar-size: 251px;
         color: white;
       }
       &:last-of-type {
-        border-bottom-width: 0px;
+        border-bottom-width: 0;
       }
     }
   }
@@ -119,5 +119,11 @@ $sidebar-size: 251px;
     padding: 20px;
     font-size: 20px;
   }
+}
+
+button {
+  font-size: 36px;
+  padding: 15px;
+  cursor: pointer;
 }
 

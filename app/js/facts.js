@@ -100,7 +100,7 @@ entry = {
     ]
 };
 
-//mathFacts.first[entry.type] = entry.facts;
+mathFacts.first[entry.type + ' set 2'] = entry.facts;
 mathFacts.second[entry.type] = entry.facts;
 mathFacts.third[entry.type] = entry.facts;
 mathFacts.fourth[entry.type] = entry.facts;
