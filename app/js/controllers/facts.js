@@ -1,5 +1,5 @@
-angular.module('thirtySixFacts.controllers').controller('FactsCntl', ['$scope', '$location', 'localStorageService', 'MathFacts',
-    function($scope, $location, localStorageService, MathFacts) {
+angular.module('thirtySixFacts.controllers').controller('FactsCntl', ['$scope', '$location',
+    function($scope, $location) {
         $scope.$location = $location;
 
         var states = {
@@ -10,19 +10,19 @@ angular.module('thirtySixFacts.controllers').controller('FactsCntl', ['$scope', 
 
         var grade = $location.path().substring(1);
 
-        if (Object.keys(MathFacts[grade]).length > 1) {
-            MathFacts[grade]['humdinger'] = [];
-            angular.forEach(MathFacts[grade], function (value, key) {
+        if (Object.keys(mathFacts[grade]).length > 1) {
+            mathFacts[grade]['humdinger'] = [];
+            angular.forEach(mathFacts[grade], function (value, key) {
                 if (key !== 'humdinger') {
                     //console.log(value, key);
-                    MathFacts[grade]['humdinger'] = MathFacts[grade]['humdinger'].concat(value);
+                    mathFacts[grade]['humdinger'] = mathFacts[grade]['humdinger'].concat(value);
                 }
             });
-            //console.log("Grade: " + grade, MathFacts[grade]['humdinger'], MathFacts[grade]['humdinger'].length);
+            //console.log("Grade: " + grade, mathFacts[grade]['humdinger'], mathFacts[grade]['humdinger'].length);
         }
 
         // Safe fall back since all grades have addition
-        if (MathFacts[grade][$scope.option.mode] === undefined) {
+        if (mathFacts[grade][$scope.option.mode] === undefined) {
             $scope.option.mode = 'addition';
         }
 
@@ -42,7 +42,7 @@ angular.module('thirtySixFacts.controllers').controller('FactsCntl', ['$scope', 
         var buildQuestionList = function() {
             $scope.questionOrder = [];
             var foundNumbers = {};
-            $scope.questionList = MathFacts[grade][$scope.option.mode];
+            $scope.questionList = mathFacts[grade][$scope.option.mode];
             for (var i = 0; i < $scope.questionList.length; i++) {
                 var question = Math.round(Math.random() * ($scope.questionList.length - 1));
                 while (foundNumbers[question] !== undefined) {

@@ -13,7 +13,7 @@ var mathFacts = {
     },
     "sixth": {
     }
-}
+};
 
 var entry = {
     type: "addition",

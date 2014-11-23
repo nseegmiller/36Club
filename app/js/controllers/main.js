@@ -1,7 +1,6 @@
-angular.module('thirtySixFacts.controllers').controller('MainCntl', ['$scope', '$location', 'localStorageService', 'MathFacts',
-    function($scope, $location, localStorageService, MathFacts) {
+angular.module('thirtySixFacts.controllers').controller('MainCntl', ['$scope', '$location', 'localStorageService',
+    function($scope, $location, localStorageService) {
         $scope.$location = $location;
-        $scope.MathFacts = MathFacts;
 
         $scope.grades = [
             {
@@ -35,7 +34,7 @@ angular.module('thirtySixFacts.controllers').controller('MainCntl', ['$scope', '
         ];
 
         $scope.getOptions = function(grade) {
-            return Object.keys(MathFacts[grade.path.substring(1)]);
+            return Object.keys(mathFacts[grade.path.substring(1)]);
         };
 
         localStorageService.add('lastMode', $scope.mode);
